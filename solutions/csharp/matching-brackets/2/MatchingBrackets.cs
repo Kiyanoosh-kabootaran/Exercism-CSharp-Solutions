@@ -1,0 +1,30 @@
+using System.Collections.Generic;
+
+public static class MatchingBrackets
+{
+    public static bool IsPaired(string input)
+    {
+        Stack<char> stack = new Stack<char>();
+        
+        foreach(char c in input)
+        {
+            if(c == '{' || c == '(' || c == '[') stack.Push(c);
+            
+            else if (c == '}' || c == ')' || c == ']')
+            {
+                if (stack.Count == 0 ) return false;
+                else
+                {
+                    if(c=='}' && stack.Peek() == '{') stack.Pop();
+                    else if(c==')' && stack.Peek() == '(') stack.Pop();
+                    else if(c==']' && stack.Peek() == '[') stack.Pop();
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        return (stack.Count == 0) ? true : false;
+    }
+}
